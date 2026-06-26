@@ -1,7 +1,7 @@
 import { JSX } from "react/jsx-runtime";
 
 import { createClient } from "@/libs/supabase/server";
-import ExpensesCard from "@/components/expenses/ExpensesCard";
+import ExpensesList from "@/components/expenses/ExpensesList";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -18,7 +18,6 @@ export default async function Home() {
     `
     )
     .order("amount", { ascending: false })
-    .limit(1);
 
   if (error) {
     console.error(error.message);
@@ -28,15 +27,7 @@ export default async function Home() {
 
   return (
     <main className="w-[90%] mx-auto">
-      {data.map((expense) => (
-        <ExpensesCard
-          key={expense.id}
-          variant={expense.status}
-          title={expense.title}
-          description={expense.description}
-          amount={expense.amount}
-        />
-      ))}
+      <ExpensesList initialExpenses={data ?? []} />
     </main>
   );
 }

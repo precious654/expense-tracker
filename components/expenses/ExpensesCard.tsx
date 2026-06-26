@@ -4,7 +4,6 @@ import React from "react";
 import clsx from "clsx";
 
 interface Expense {
-  key: string;
   title: string;
   amount: number;
   description: string;
@@ -12,7 +11,6 @@ interface Expense {
 }
 
 const ExpensesCard = ({
-  key,
   variant = "pending",
   title,
   amount,
@@ -20,9 +18,8 @@ const ExpensesCard = ({
 }: Expense) => {
   return (
     <div
-      key={key}
       className={clsx(
-        "px-3 py-4 rounded-2xl flex justify-between items-start",
+        "px-3 py-4 rounded-2xl flex justify-between items-start cursor-pointer",
         variant === "pending" && "hover:bg-[#EFF6FF] hover:border hover:border-blue-500",
         variant === "approved" && "hover:bg-[#F0FDF4] hover:border hover:border-green-500",
         variant === "rejected" && "hover:bg-[#FEF2F2] hover:border hover:border-red-500"
