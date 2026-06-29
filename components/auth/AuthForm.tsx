@@ -1,13 +1,15 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/context/AuthContext";
 
 type step = "signup" | "signin";
 
 const AuthForm = () => {
-  const { session, signInUser } = useAuth();
+  const router = useRouter();
+  const { session, signInUser, signUpUser } = useAuth();
   const [step, setStep] = React.useState<step>("signup");
 
   const [error, submitAction, isPending] = React.useActionState(
@@ -26,15 +28,20 @@ const AuthForm = () => {
           return new Error("Passwords do not match");
         }
 
-        // const{success, data, error: signUpError} = await signUp();
+        const {
+          success,
+          data,
+          error: signUpError,
+        } = await signUpUser(userData.email, userData.password, userData.name);
 
-        // if(signInError) {
-        //   return new Error(signUpError);
-        // }
+        if (signUpError) {
+          return new Error(signUpError);
+        }
 
-        // if(success && data.session) {
-        //   return null;
-        // }
+        if (success && data.session) {
+          setStep("signin");
+          return null;
+        }
 
         return null;
       } else if (step === "signin") {
@@ -54,12 +61,12 @@ const AuthForm = () => {
         }
 
         if (success && data.session) {
+          router.push("/");
           return null;
         }
 
         return null;
       }
-      console.log(userData);
     },
     null
   );

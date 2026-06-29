@@ -1,23 +1,29 @@
-import { JSX } from "react/jsx-runtime";
-
 import { createClient } from "@/libs/supabase/server";
 import ExpensesList from "@/components/expenses/ExpensesList";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const supabase = await createClient();
 
-  const { data, error } = await supabase
-    .from("expenses")
-    .select(
-      `
+  const [{ data, error }, { data: sessionData }] = [
+    await supabase
+      .from("expenses")
+      .select(
+        `
       id,
     title,
     description,
     amount,
     status
     `
-    )
-    .order("amount", { ascending: false })
+      )
+      .order("amount", { ascending: false }),
+    await supabase.auth.getSession(),
+  ];
+
+  if (!sessionData.session) {
+    redirect("/auth");
+  }
 
   if (error) {
     console.error(error.message);
