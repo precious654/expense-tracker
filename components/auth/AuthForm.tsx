@@ -131,13 +131,16 @@ const AuthForm = () => {
               name="email"
               id="email"
             />
-            <input
-              type="password"
-              className="rounded-2xl py-4 px-3 bg-gray-300 outline-0"
-              placeholder="Password"
-              name="password"
-              id="password"
-            />
+            <div className="w-full">
+              <input
+                type="password"
+                className="rounded-2xl py-4 px-3 bg-gray-300 outline-0 w-full"
+                placeholder="Password"
+                name="password"
+                id="password"
+              />
+              <p className="text-sm font-medium text-gray-600 mt-2">Forgot password?</p>
+            </div>
             <button className="py-4 rounded-full bg-amber-400 w-full mt-3 text-white">
               {isPending ? "signing in" : "sign in"}
             </button>

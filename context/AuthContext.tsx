@@ -79,6 +79,8 @@ export const AuthContextProvider = ({
         options: {
           data: {
             display_name: username,
+            account_type: "user",
+            team_role: email === "odukwechiemeka@outlook.com" ? "admin" : "member",
           },
         },
       });
