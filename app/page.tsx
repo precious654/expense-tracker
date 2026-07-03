@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { createClient } from "@/libs/supabase/server";
 import ExpensesList from "@/components/expenses/ExpensesList";
 import { redirect } from "next/navigation";
@@ -34,6 +36,8 @@ export default async function Home() {
   return (
     <main className="w-[90%] mx-auto">
       <ExpensesList initialExpenses={data ?? []} />
+      
+      <Link href="/teams/create" className="underline text-sm font-semibold">Create team</Link>
     </main>
   );
 }

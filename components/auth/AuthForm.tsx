@@ -107,7 +107,7 @@ const AuthForm = () => {
               name="confirmPassword"
               id="confirmPassword"
             />
-            <button className="py-4 rounded-full bg-amber-400 w-full mt-3 text-white">
+            <button type="submit" className="py-4 rounded-full bg-amber-400 w-full mt-3 text-white">
               {isPending ? "signing up" : "sign up"}
             </button>
             <p className="text-sm">
@@ -141,7 +141,7 @@ const AuthForm = () => {
               />
               <p className="text-sm font-medium text-gray-600 mt-2">Forgot password?</p>
             </div>
-            <button className="py-4 rounded-full bg-amber-400 w-full mt-3 text-white">
+            <button type="submit" className="py-4 rounded-full bg-amber-400 w-full mt-3 text-white">
               {isPending ? "signing in" : "sign in"}
             </button>
             <p className="text-sm">
