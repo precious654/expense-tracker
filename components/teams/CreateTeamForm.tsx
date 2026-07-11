@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
+
 import { createTeam } from "@/actions/create-team";
 
 const CreateTeamForm = () => {
+  const router = useRouter();
   const [error, submitAction, isPending] = React.useActionState(
     async (prevState, formData: FormData) => {
       const teamName = formData.get("name");
@@ -21,6 +24,7 @@ const CreateTeamForm = () => {
 
       if (success) {
         console.log(data);
+        router.push(`/teams/${data.id}`);
         return null;
       }
     },

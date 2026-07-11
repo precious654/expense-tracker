@@ -38,6 +38,7 @@ export default async function Home() {
       <ExpensesList initialExpenses={data ?? []} />
       
       <Link href="/teams/create" className="underline text-sm font-semibold">Create team</Link>
+      <Link href="/teams/f7ef7009-5b9a-4f87-8d9f-5f416819ce75" className="underline text-sm font-semibold block mt-2">View team</Link>
     </main>
   );
 }

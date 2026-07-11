@@ -17,7 +17,7 @@ export async function createTeam(name: string) {
       };
     }
 
-    const { data, error } = await supabase
+    const { data: team, error: teamError } = await supabase
       .from("teams")
       .insert({
         name: name,
@@ -26,11 +26,21 @@ export async function createTeam(name: string) {
       .select()
       .single();
 
-    if (error) {
-      return { success: false, error: error.message };
+    if (teamError) {
+      return { success: false, error: teamError.message };
     }
 
-    return { success: true, data: data };
+    const { error: memberError } = await supabase.from("team_member").insert({
+      user_id: user.id,
+      team_id: team.id,
+      role: "owner",
+    });
+
+    if (memberError) {
+      return { success: false, error: memberError.message };
+    }
+
+    return { success: true, data: team };
   } catch (error) {
     console.error("Error creating team:", error);
     return {
